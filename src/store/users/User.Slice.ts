@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { login } from "./User.Action";
 
 interface UserState {
-  user: any; // You should replace 'any' with the actual type of user data
+  user: any;
   isLoading: boolean;
   loginStatus: boolean;
 }

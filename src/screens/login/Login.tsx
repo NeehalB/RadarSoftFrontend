@@ -40,7 +40,7 @@ const Login = () => {
     }
 
     if (userData?.loginStatus) {
-      localStorage.setItem("token", userData?.token);
+      localStorage.setItem("token", userData?.user?.token);
       navigate("/");
     }
   }, [userData]);
