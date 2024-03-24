@@ -10,38 +10,35 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { login } from "../../store/users/User.Action";
-import { useNavigate } from "react-router-dom";
+import { addUser } from "../../store/users/User.Action";
+// import { useNavigate } from "react-router-dom";
 
-interface loginData {
+interface signUpData {
+  name: string;
   email: string;
   password: string;
 }
 
-const Login = () => {
-  const [loginData, setLoginData] = useState<loginData>({
+const SignUp = () => {
+  const [signUpData, setSignUpData] = useState<signUpData>({
+    name: "",
     email: "",
     password: "",
   });
   const [open, setOpen] = useState<boolean>(false);
   const userDispatch = useAppDispatch();
-  const navigate = useNavigate();
+  //   const navigate = useNavigate();
 
   const userData = useAppSelector((state: any) => state.user);
 
   const handleOnSubmit = (event: any) => {
     event.preventDefault();
-    userDispatch(login(loginData));
+    userDispatch(addUser(signUpData));
   };
 
   useEffect(() => {
     if (userData?.user?.message) {
       setOpen(true);
-    }
-
-    if (userData?.loginStatus) {
-      localStorage.setItem("token", userData?.user?.token);
-      navigate("/");
     }
   }, [userData]);
 
@@ -60,30 +57,41 @@ const Login = () => {
         <Box alignItems="center" justifyContent="center">
           <Paper sx={{ padding: "10px" }}>
             <Typography textAlign={"center"} variant="h4" mb={2}>
-              Login
+              Sign Up
             </Typography>
             <form autoComplete="off" onSubmit={handleOnSubmit}>
               <TextField
+                label="Fullname"
+                onChange={(e) =>
+                  setSignUpData({ ...signUpData, name: e.target.value })
+                }
+                required
+                type="text"
+                sx={{ mb: 3 }}
+                fullWidth
+                value={signUpData.name}
+              />
+              <TextField
                 label="Email"
                 onChange={(e) =>
-                  setLoginData({ ...loginData, email: e.target.value })
+                  setSignUpData({ ...signUpData, email: e.target.value })
                 }
                 required
                 type="email"
                 sx={{ mb: 3 }}
                 fullWidth
-                value={loginData.email}
+                value={signUpData.email}
               />
               <TextField
                 label="Password"
                 onChange={(e) =>
-                  setLoginData({ ...loginData, password: e.target.value })
+                  setSignUpData({ ...signUpData, password: e.target.value })
                 }
                 required
                 type="password"
                 sx={{ mb: 3 }}
                 fullWidth
-                value={loginData.password}
+                value={signUpData.password}
               />
               <Button
                 variant="contained"
@@ -93,14 +101,6 @@ const Login = () => {
                 Submit
               </Button>
             </form>
-            <Button
-              variant="text"
-              onClick={() => {
-                navigate("/sign_up");
-              }}
-            >
-              Sign Up
-            </Button>
           </Paper>
         </Box>
       </Grid>
@@ -114,4 +114,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

@@ -17,3 +17,19 @@ export const login = createAsyncThunk(
     }
   }
 );
+
+export const addUser = createAsyncThunk(
+  "Adduser",
+  async (
+    userData: { name: string; email: string; password: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      const { data } = await axios.post(`${BASE_API}${apis.addUser}`, userData);
+      return data;
+    } catch (error: any) {
+      const errorMessage = error.response ? error.response.data : error.message;
+      return rejectWithValue(errorMessage);
+    }
+  }
+);

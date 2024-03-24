@@ -18,7 +18,7 @@ const pages = [
   { title: "My Blogs", link: "/my_blog" },
   { title: "Add Blog", link: "/add_blog" },
 ];
-const settings = ["Add Blog", "Logout"];
+const settings = ["Logout"];
 
 function CustomAppbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -44,6 +44,11 @@ function CustomAppbar() {
     if (element?.link === "/my_blog")
       return navigate(element.link, { state: { user: true } });
     navigate(element.link);
+  };
+
+  const handlelogout = () => {
+    localStorage.clear();
+    navigate("/login");
   };
 
   return (
@@ -166,7 +171,13 @@ function CustomAppbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => {
+                    handlelogout();
+                    handleCloseUserMenu();
+                  }}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

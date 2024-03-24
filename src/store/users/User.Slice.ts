@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login } from "./User.Action";
+import { addUser, login } from "./User.Action";
 
 interface UserState {
   user: any;
@@ -30,6 +30,17 @@ const UserSlice = createSlice({
       state.isLoading = false;
       state.user = action.payload;
       state.loginStatus = false;
+    });
+    builder.addCase(addUser.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(addUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload;
+    });
+    builder.addCase(addUser.rejected, (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload;
     });
   },
 });

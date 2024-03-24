@@ -4,6 +4,7 @@ import Blog from "../screens/blog/Blog";
 import AuthWrapper from "./AuthWrapper";
 import AddBlogForm from "../screens/blog/AddBlogForm";
 import UserBlog from "../screens/blog/UserBlog";
+import SignUp from "../screens/login/SignUp";
 
 export const router = createBrowserRouter([
   {
@@ -28,5 +29,9 @@ export const router = createBrowserRouter([
   {
     path: "login",
     element: <Login />,
+  },
+  {
+    path: "sign_up",
+    element: <SignUp />,
   },
 ]);
