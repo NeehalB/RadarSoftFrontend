@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addBlog, getBlogs } from "./Blog.Action";
+import {
+  addBlog,
+  deleteUserBlog,
+  editUserBlog,
+  getBlogs,
+  getUserBlogs,
+} from "./Blog.Action";
 
 interface BlogData {
   blogs: any;
@@ -33,6 +39,17 @@ const BlogSlice = createSlice({
       state.isLoading = false;
       state.blogs = action.payload;
     });
+    builder.addCase(getUserBlogs.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getUserBlogs.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.blogs = action.payload;
+    });
+    builder.addCase(getUserBlogs.rejected, (state, action) => {
+      state.isLoading = false;
+      state.blogs = action.payload;
+    });
     builder.addCase(addBlog.pending, (state) => {
       state.isLoading = true;
     });
@@ -41,6 +58,28 @@ const BlogSlice = createSlice({
       state.message = action.payload;
     });
     builder.addCase(addBlog.rejected, (state, action) => {
+      state.isLoading = false;
+      state.message = action.payload;
+    });
+    builder.addCase(editUserBlog.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(editUserBlog.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.message = action.payload;
+    });
+    builder.addCase(editUserBlog.rejected, (state, action) => {
+      state.isLoading = false;
+      state.message = action.payload;
+    });
+    builder.addCase(deleteUserBlog.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteUserBlog.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.message = action.payload;
+    });
+    builder.addCase(deleteUserBlog.rejected, (state, action) => {
       state.isLoading = false;
       state.message = action.payload;
     });

@@ -41,6 +41,8 @@ function CustomAppbar() {
   };
 
   const handlePageNavigation = (element: any) => {
+    if (element?.link === "/my_blog")
+      return navigate(element.link, { state: { user: true } });
     navigate(element.link);
   };
 

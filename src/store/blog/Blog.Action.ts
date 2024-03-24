@@ -29,7 +29,68 @@ export const addBlog = createAsyncThunk(
         blogData
       );
 
-      console.log(data);
+      return data;
+    } catch (error: any) {
+      const errorMessage = error.response ? error.response.data : error.message;
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
+export const getUserBlogs = createAsyncThunk(
+  "GetUserBlogs",
+  async (userData: { id?: string }, { rejectWithValue }) => {
+    console.log(userData);
+    try {
+      const { data } = await AxiosInterceptor.get(
+        `${BASE_API}${apis.userArticles}`,
+        {
+          params: userData,
+        }
+      );
+      return data;
+    } catch (error: any) {
+      const errorMessage = error.response ? error.response.data : error.message;
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
+export const editUserBlog = createAsyncThunk(
+  "EditUserBlog",
+  async (
+    blogData: {
+      title: string;
+      category: string;
+      description: string;
+      id: string;
+    },
+    { rejectWithValue }
+  ) => {
+    console.log(blogData);
+
+    try {
+      const data = await AxiosInterceptor.put(
+        `${BASE_API}${apis.editArticle}`,
+        blogData
+      );
+
+      return data;
+    } catch (error: any) {
+      const errorMessage = error.response ? error.response.data : error.message;
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
+export const deleteUserBlog = createAsyncThunk(
+  "DeleteUserBlog",
+  async (userData: { id: string }, { rejectWithValue }) => {
+    try {
+      const { data } = await AxiosInterceptor.delete(
+        `${BASE_API}${apis.deleteUserArticle}`,
+        { params: userData }
+      );
 
       return data;
     } catch (error: any) {

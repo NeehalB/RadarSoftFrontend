@@ -3,6 +3,7 @@ import Login from "../screens/login/Login";
 import Blog from "../screens/blog/Blog";
 import AuthWrapper from "./AuthWrapper";
 import AddBlogForm from "../screens/blog/AddBlogForm";
+import UserBlog from "../screens/blog/UserBlog";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
       {
         path: "/add_blog",
         element: <AddBlogForm />,
+      },
+      {
+        path: "/my_blog",
+        element: <UserBlog />,
       },
     ],
   },
