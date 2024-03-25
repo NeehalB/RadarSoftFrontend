@@ -20,10 +20,10 @@ const Blog = () => {
   const [dateSort, setDateSort] = useState("none");
 
   useEffect(() => {
-    if (!blogs?.data?.length) {
-      blogDispatch(getBlogs());
-    }
+    blogDispatch(getBlogs());
+  }, []);
 
+  useEffect(() => {
     setFilteredList(blogs?.data);
   }, [blogs]);
 
