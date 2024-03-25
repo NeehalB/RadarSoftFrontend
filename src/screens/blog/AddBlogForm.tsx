@@ -19,11 +19,12 @@ import {
   editUserBlog,
   getUserBlogs,
 } from "../../store/blog/Blog.Action";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AddBlogForm = () => {
   const { state } = useLocation();
   const blogDispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { categories, blogs, isLoading } = useAppSelector(
     (state) => state.blog
   );
@@ -39,10 +40,12 @@ const AddBlogForm = () => {
 
     if (state?.id) {
       blogDispatch(editUserBlog({ ...formData, id: state.id }));
+      navigate("/");
       return;
     }
 
     blogDispatch(addBlog(formData));
+    navigate("/");
   };
 
   useEffect(() => {
