@@ -171,13 +171,7 @@ function CustomAppbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem
-                  key={setting}
-                  onClick={() => {
-                    handlelogout();
-                    handleCloseUserMenu();
-                  }}
-                >
+                <MenuItem key={setting} onClick={handlelogout}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

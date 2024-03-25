@@ -39,8 +39,7 @@ const Login = () => {
       setOpen(true);
     }
 
-    if (userData?.loginStatus) {
-      localStorage.setItem("token", userData?.user?.token);
+    if (localStorage.getItem("token")) {
       navigate("/");
     }
   }, [userData]);

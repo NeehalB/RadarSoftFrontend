@@ -10,6 +10,7 @@ export const login = createAsyncThunk(
   ) => {
     try {
       const { data } = await axios.post(`${BASE_API}${apis.login}`, userData);
+      localStorage.setItem("token", data?.user?.token);
       return data;
     } catch (error: any) {
       const errorMessage = error.response ? error.response.data : error.message;
