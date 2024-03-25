@@ -11,7 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { addUser } from "../../store/users/User.Action";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface signUpData {
   name: string;
@@ -27,13 +27,14 @@ const SignUp = () => {
   });
   const [open, setOpen] = useState<boolean>(false);
   const userDispatch = useAppDispatch();
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const userData = useAppSelector((state: any) => state.user);
 
   const handleOnSubmit = (event: any) => {
     event.preventDefault();
     userDispatch(addUser(signUpData));
+    navigate("/login");
   };
 
   useEffect(() => {
